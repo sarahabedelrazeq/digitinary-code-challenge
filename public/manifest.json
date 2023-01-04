@@ -1,0 +1,25 @@
+{
+  "short_name": "Digitinary",
+  "name": "Digitinary Code Challenge",
+  "icons": [
+    {
+      "src": "cropped-fav-2-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "cropped-fav-2-180x180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "cropped-fav-2-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
