@@ -15,7 +15,12 @@ const routes: RouteDataItem[] = [
     isProtected: true,
     component: React.lazy(() => import("pages/Home")),
   },
-
+  {
+    path: "/login",
+    name: "login",
+    isAuth: true,
+    component: React.lazy(() => import("pages/Login")),
+  },
 ];
 
 export default routes;
