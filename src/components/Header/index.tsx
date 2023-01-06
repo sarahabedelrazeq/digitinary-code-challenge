@@ -14,12 +14,14 @@ import {
   MenuItem,
   Grid,
   Stack,
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
 import { darkLogo, logo } from "constantData";
 import styles from "./style.module.scss";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import userContext from "store/userContext";
 
 interface Props {
   window?: () => Window;
@@ -32,6 +34,7 @@ export default function Header({ window }: Props) {
     threshold: 0,
     target: window ? window() : undefined,
   });
+  const { logoutHandler } = React.useContext(userContext);
 
   return (
     <AppBar
@@ -53,7 +56,12 @@ export default function Header({ window }: Props) {
         mx={0}
       >
         <Grid item lg={2} xs={4}>
-          <img src={trigger ? darkLogo : logo} alt="logo" width={150} height={37.188} />
+          <img
+            src={trigger ? darkLogo : logo}
+            alt="logo"
+            width={150}
+            height={37.188}
+          />
         </Grid>
         <Grid item lg={6} xs={0} sx={{ display: { xs: "none", lg: "block" } }}>
           <Search>
@@ -158,7 +166,7 @@ export default function Header({ window }: Props) {
             Profile
           </Link>
         </MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={() => logoutHandler()}>Logout</MenuItem>
       </Menu>
     </AppBar>
   );
