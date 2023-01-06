@@ -3,7 +3,8 @@ import React from "react";
 interface UserContextInterface {
   isLoggedIn: boolean;
   user: object | null;
-  loginHandler: Function
+  loginHandler: Function;
+  logoutHandler: Function;
 }
 
 const userContext = React.createContext({

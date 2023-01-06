@@ -34,12 +34,19 @@ function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
       );
     }, []);
 
+    const logoutHandler = React.useCallback(() => {
+      setUser(null);
+      setIsLoggedIn(false);
+      localStorage.removeItem("digitinary_code_challenge_user");
+    }, []);
+
     return (
       <UserContext.Provider
         value={{
           isLoggedIn: isLoggedIn,
           user: user,
           loginHandler: loginHandler,
+          logoutHandler: logoutHandler
         }}
       >
         <ErrorBoundary>
