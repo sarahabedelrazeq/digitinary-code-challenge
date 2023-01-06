@@ -1,23 +1,32 @@
 import * as React from "react";
-import {
-  Button,
-  TextField,
-  Link,
-  Box,
-  Grid,
-  Typography,
-  Paper,
-} from "@mui/material";
-
+import { Button, TextField, Box, Grid, Typography, Paper } from "@mui/material";
+import userContext from "store/userContext";
 import { Alert } from "@mui/material";
+import withContainer from "./Container";
 
-export default function Login() {
+interface User {
+  id: number;
+  email: string;
+}
+
+function Login({
+  users,
+  usersLoading,
+}: {
+  users: Array<User> | null;
+  usersLoading: boolean;
+}) {
   const [error, setError] = React.useState("");
+  const { loginHandler } = React.useContext(userContext);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
+    if (users) {
+      const findUser = users.filter((user) => user.email === email);
+      if (findUser.length > 0) loginHandler(findUser[0]);
+    }
   };
 
   return (
@@ -95,3 +104,4 @@ export default function Login() {
     </div>
   );
 }
+export default withContainer(Login);
