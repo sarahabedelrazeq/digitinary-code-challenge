@@ -35,7 +35,6 @@ class PostService {
             if (comments.success && comments.data)
               data[i] = { ...data[i], comments: comments.data };
           }
-          console.log("data", data);
           return data;
         });
       return { success: true, data };
