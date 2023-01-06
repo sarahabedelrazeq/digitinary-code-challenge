@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
-import { darkLogo, logo } from "constants/images";
+import { darkLogo, logo } from "constantData";
 import styles from "./style.module.scss";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
@@ -53,7 +53,7 @@ export default function Header({ window }: Props) {
         mx={0}
       >
         <Grid item lg={2} xs={4}>
-          <img src={trigger ? darkLogo : logo} alt="logo"  width={200} />
+          <img src={trigger ? darkLogo : logo} alt="logo" width={150} height={37.188} />
         </Grid>
         <Grid item lg={6} xs={0} sx={{ display: { xs: "none", lg: "block" } }}>
           <Search>
@@ -66,12 +66,12 @@ export default function Header({ window }: Props) {
             />
           </Search>
         </Grid>
-        <Grid item lg={4} xs={8}>
+        <Grid item lg={4} xs={7}>
           <Stack
             direction="row"
             justifyContent="end"
             alignItems="center"
-            spacing={2}
+            spacing={1}
           >
             <IconButton
               size="large"
@@ -106,9 +106,7 @@ export default function Header({ window }: Props) {
             <IconButton
               size="large"
               edge="end"
-              aria-label="account of current user"
-              aria-controls="demo-positioned-menu"
-              aria-haspopup="true"
+              aria-label="search"
               color="inherit"
               sx={{ display: { xs: "flex", md: "none" } }}
             >
@@ -124,8 +122,6 @@ export default function Header({ window }: Props) {
               size="large"
               edge="end"
               aria-label="account of current user"
-              aria-controls="demo-positioned-menu"
-              aria-haspopup="true"
               onClick={() => setOpen(true)}
               color="inherit"
             >

@@ -3,9 +3,8 @@ import { Grid } from "@mui/material";
 import Footer from "../Footer";
 import Header from "../Header";
 import styles from "./style.module.css";
-import Sidebar from "components/Sidebar";
-import RightBar from "components/RightBar";
-import PhoneNav from "components/PhoneNav";
+import { Sidebar, RightBar, PhoneNav } from "components";
+import { Box } from "@mui/system";
 
 interface Props {
   children?: React.ReactNode;
@@ -19,11 +18,7 @@ const Main = (props: Props) => {
     <div id="main-layout">
       <Header />
       <div className={styles.pageContainer} id={props.id ? props.id : "page"}>
-        <Grid
-          container
-          spacing={2}
-          justifyContent="space-between"
-        >
+        <Grid container spacing={2} justifyContent="space-between">
           <Grid
             item
             lg={2}
@@ -36,9 +31,17 @@ const Main = (props: Props) => {
             item
             lg={6}
             xs={12}
-            sx={{ display: { xs: value !== 1 ? "none" : "", lg: "block" } }}
+            sx={{
+              display: { xs: value !== 1 ? "none" : "", lg: "block" },
+            }}
           >
-            {props.children}
+            <Box
+              sx={{
+                padding: { xs: "25px 8px", lg: "25px 0" },
+              }}
+            >
+              {props.children}
+            </Box>
           </Grid>
           <Grid
             item

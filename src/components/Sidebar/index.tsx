@@ -7,6 +7,7 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
+  FormControlLabel,
   List,
   ListItem,
   ListItemButton,
@@ -51,7 +52,7 @@ const Sidebar = () => {
             <ListItemIcon>
               <ModeNight />
             </ListItemIcon>
-            <Switch onChange={(e) => {}} />
+            <FormControlLabel aria-label="Switch theme to the dark" control={<Switch defaultChecked />} label="" />
           </ListItemButton>
         </ListItem>
 
