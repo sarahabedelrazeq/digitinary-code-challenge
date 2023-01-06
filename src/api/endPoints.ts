@@ -3,5 +3,9 @@ export const endPoints = {
         getPosts: "posts",
         getPost: "posts",
         getComments: "comments",
+    },
+    user: {
+        getUsers: "users",
+        getUser: "user"
     }
 };
