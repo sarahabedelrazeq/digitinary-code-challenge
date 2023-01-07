@@ -8,6 +8,7 @@ interface Item {
 
 class PostService {
   getAllEndPoint = endPoints.general.getPosts;
+  getSingleEndPoint = endPoints.general.getPost;
   getCommentsEndPoint = endPoints.general.getComments;
 
   async getComments(id: number) {
@@ -15,9 +16,7 @@ class PostService {
       const data = await apiService
         .unauthenticated()
         .get(`${this.getCommentsEndPoint}?postId=${id}`)
-        .then(async ({ data }: { data: Array<{ id: number }> }) => {
-          return data;
-        });
+        .then(async ({ data }: { data: Array<{ id: number }> }) => data);
       return { success: true, data };
     } catch ({ response }) {
       return { success: false, response };
@@ -29,18 +28,19 @@ class PostService {
       const data = await apiService
         .unauthenticated()
         .get(this.getAllEndPoint)
-        .then(async ({ data }: { data: Array<Item> }) => {
-          for (let i = 0; i < data.length; i++) {
-            const comments = await this.getComments(data[i].id);
-            if (comments.success && comments.data)
-              data[i] = { ...data[i], comments: comments.data };
-          }
-          return data;
-        });
+        .then(async ({ data }: { data: Array<Item> }) => data);
       return { success: true, data };
     } catch ({ response }) {
       return { success: false, response };
     }
+  }
+
+  async deletePosts(id: number) {
+    try {
+      await apiService
+        .unauthenticated()
+        .delete(`${this.getSingleEndPoint}/${id}`);
+    } catch ({ response }) {}
   }
 }
 

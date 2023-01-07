@@ -2,7 +2,12 @@ import React from "react";
 import { postService } from "services";
 
 function withContainer(
-  WrappedComponent: React.FC<{ posts: Array<object> | null, postsLoading:boolean }>
+  WrappedComponent: React.FC<{
+    posts: Array<object> | null;
+    postsLoading: boolean;
+    deletePost: Function;
+    getComments: Function;
+  }>
 ) {
   return () => {
     const [posts, setPosts] = React.useState<Array<object> | null>(null);
@@ -18,7 +23,28 @@ function withContainer(
     React.useEffect(() => {
       getPosts();
     }, [getPosts]);
-    return <WrappedComponent posts={posts} postsLoading={postsLoading} />;
+
+    const deleteHandler = React.useCallback(
+      async (id: number) => {
+        Promise.all([postService.deletePosts(id), getPosts()]);
+      },
+      [getPosts]
+    );
+
+    const getComments = React.useCallback(async (id: number) => {
+      const comments = await postService.getComments(id);
+      if (comments?.data) return comments?.data;
+      else return [];
+    }, []);
+
+    return (
+      <WrappedComponent
+        posts={posts}
+        postsLoading={postsLoading}
+        deletePost={deleteHandler}
+        getComments={getComments}
+      />
+    );
   };
 }
 

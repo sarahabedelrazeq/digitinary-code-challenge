@@ -1,8 +1,13 @@
 import React from "react";
 
+interface User {
+  id: number;
+  email: string;
+}
+
 interface UserContextInterface {
   isLoggedIn: boolean;
-  user: object | null;
+  user: User | null;
   loginHandler: Function;
   logoutHandler: Function;
 }

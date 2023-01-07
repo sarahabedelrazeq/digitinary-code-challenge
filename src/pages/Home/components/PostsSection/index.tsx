@@ -5,9 +5,13 @@ import Post from "components/Post";
 export default function PostsSection({
   posts,
   loading,
+  deleteFun,
+  getComments,
 }: {
   posts: Array<object> | null;
   loading: boolean;
+  deleteFun: Function;
+  getComments: Function;
 }) {
   return (
     <div>
@@ -21,9 +25,9 @@ export default function PostsSection({
       ) : (
         posts && (
           <Box>
-            {posts.map((post, index) => (
-              <Post {...post} key={index} />
-            ))}
+            {posts.map((post, index) => {
+              return <Post {...post} getComments={getComments} deleteFun={deleteFun} key={index} />;
+            })}
           </Box>
         )
       )}
