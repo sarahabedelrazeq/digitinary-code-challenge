@@ -47,7 +47,23 @@ class PostService {
     try {
       const data = await apiService
         .unauthenticated()
-        .post(this.getAllEndPoint, item)
+        .post(this.getAllEndPoint, item);
+      return { success: true, data };
+    } catch ({ response }) {
+      return { success: false, response };
+    }
+  }
+
+  async editPost(item: {
+    id?: number;
+    title?: FormDataEntryValue | string | null;
+    body?: FormDataEntryValue | string | null;
+    userId?: number;
+  }) {
+    try {
+      const data = await apiService
+        .unauthenticated()
+        .put(`${this.getAllEndPoint}/${item.id}`, item);
       return { success: true, data };
     } catch ({ response }) {
       return { success: false, response };

@@ -1,10 +1,8 @@
+import { User } from "interfaces";
 import React from "react";
 import { userService } from "services/UserService";
 
-interface User {
-  id: number;
-  email: string;
-}
+
 
 function withContainer(
   WrappedComponent: React.FC<{

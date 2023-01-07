@@ -3,11 +3,7 @@ import { Button, TextField, Box, Grid, Typography, Paper } from "@mui/material";
 import userContext from "store/userContext";
 import { Alert } from "@mui/material";
 import withContainer from "./Container";
-
-interface User {
-  id: number;
-  email: string;
-}
+import { User } from "interfaces";
 
 function Login({
   users,

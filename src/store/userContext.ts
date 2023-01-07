@@ -1,9 +1,5 @@
+import { User } from "interfaces";
 import React from "react";
-
-interface User {
-  id: number;
-  email: string;
-}
 
 interface UserContextInterface {
   isLoggedIn: boolean;

@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import userContext from "store/userContext";
+import EditPost from "components/EditPost";
 
 interface Comment {
   postId: number;
@@ -79,7 +80,13 @@ const Post = ({
                   id="composition-menu"
                   aria-labelledby="composition-button"
                 >
-                  {user && userId === user.id && <MenuItem>edit post</MenuItem>}
+                  {user && userId === user.id && (
+                    <MenuItem>
+                      <EditPost post={{ id, title, body, userId }}>
+                        edit post
+                      </EditPost>
+                    </MenuItem>
+                  )}
                   {user && userId === user.id && (
                     <MenuItem onClick={() => id && deleteFun(id)}>
                       delete post

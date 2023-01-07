@@ -1,11 +1,7 @@
 import React from "react";
 import UserContext from "store/userContext";
 import { ErrorBoundary } from "components";
-
-interface User {
-  id: number;
-  email: string;
-}
+import { User } from "interfaces";
 
 function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
   return () => {
@@ -46,7 +42,7 @@ function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
           isLoggedIn: isLoggedIn,
           user: user,
           loginHandler: loginHandler,
-          logoutHandler: logoutHandler
+          logoutHandler: logoutHandler,
         }}
       >
         <ErrorBoundary>
