@@ -17,6 +17,7 @@ import {
   Typography,
   MenuItem,
   MenuList,
+  Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
@@ -50,7 +51,6 @@ const Post = ({
   const [open, setOpen] = React.useState<boolean>(false);
   const [comments, setComments] = React.useState<Array<Comment>>([]);
   const { user } = React.useContext(userContext);
-
 
   React.useEffect(() => {
     getComments(id).then((data: Array<Comment>) => setComments(data));
@@ -135,30 +135,58 @@ const Post = ({
 
         {comments && (
           <div>
-            {comments
-              .slice(0, show ? comments.length : 1)
-              .map((item, index) => (
-                <List key={index}>
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar alt="user" src={""} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={item?.body}
-                      secondary="Jan 7, 2014"
-                    />
-                  </ListItem>
-                </List>
-              ))}
-            {comments.length > 1 && !show && (
-              <Button
-                onClick={() => setShow(true)}
-                sx={{ color: "black" }}
-                aria-label="show all comments"
-              >
-                show all comments
-              </Button>
-            )}
+            <List>
+              {comments
+                .slice(0, show ? comments.length : 1)
+                .map((item, index) => (
+                  <>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar alt="user" src={""} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <Box
+                            sx={{
+                              p: 1,
+                              bgcolor: "grey.100",
+                              border: "1px solid",
+                              borderColor: "grey.300",
+                              borderRadius: 2,
+                              mb: 1,
+                            }}
+                          >
+                            <Box
+                              component="p"
+                              sx={{
+                                color: "grey.800",
+                                fontSize: "0.875rem",
+                                fontWeight: "700",
+                                m: 0,
+                              }}
+                              className=" text-overflow-2"
+                            >
+                              {item?.body}
+                            </Box>
+                          </Box>
+                        }
+                        secondary="Jan 7, 2014"
+                      />
+                    </ListItem>
+
+                    <Divider variant="inset" component="li" />
+                  </>
+                ))}
+              {comments.length > 1 && !show && (
+                <Button
+                  onClick={() => setShow(true)}
+                  sx={{ color: "black" }}
+                  aria-label="show all comments"
+                >
+                  show all comments
+                </Button>
+              )}
+            </List>
           </div>
         )}
       </Card>
