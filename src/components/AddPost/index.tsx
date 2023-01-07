@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Add, Save } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { postService } from "services";
 import userContext from "store/userContext";
@@ -24,43 +24,27 @@ const style = {
   p: 4,
 };
 
-// id,
-// title,
-// body,
-// userId,
-
 export default function AddPost({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [image, setImage] = React.useState(false);
   const { user } = React.useContext(userContext);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleAddPost = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
-    postService.addPost({
-      userId: user && user.id,
-      title: data.get("title"),
-      body: data.get("body"),
-    });
-    // setLoading(true);
-    // // const { data: post, error } = await supabase.from("posts").insert([
-    // //   {
-    // //     text: data.get("text"),
-    // //     image: image
-    // //       ? "https://jhdpgjjcbrlbvddzodju.supabase.co/storage/v1/object/public/" +
-    // //         image
-    // //       : "",
-    // //     user_id: user.id,
-    // //   },
-    // // ]);
-    // setLoading(false);
-    // if (error && error.message) setError(error.message);
-    // else if (post) setOpen(false);
+    if (data.get("title"))
+      postService.addPost({
+        userId: user && user.id,
+        title: data.get("title"),
+        body: data.get("body"),
+      });
+    else setError("you should fill title field");
+    setLoading(false);
   };
 
   return (
