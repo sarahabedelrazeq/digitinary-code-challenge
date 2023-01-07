@@ -21,6 +21,7 @@ import { darkLogo, logo } from "constantData";
 import styles from "./style.module.scss";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import userContext from "store/userContext";
+import AddPost from "components/AddPost";
 
 interface Props {
   window?: () => Window;
@@ -164,6 +165,9 @@ export default function Header({ window }: Props) {
           <Link to={`/`} style={{ color: "inherit", textDecoration: "none" }}>
             Profile
           </Link>
+        </MenuItem>
+        <MenuItem>
+          <AddPost>Add Post</AddPost>
         </MenuItem>
         <MenuItem onClick={() => logoutHandler()}>Logout</MenuItem>
       </Menu>

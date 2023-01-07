@@ -42,6 +42,17 @@ class PostService {
         .delete(`${this.getSingleEndPoint}/${id}`);
     } catch ({ response }) {}
   }
+
+  async addPost(item: object) {
+    try {
+      const data = await apiService
+        .unauthenticated()
+        .post(this.getAllEndPoint, item)
+      return { success: true, data };
+    } catch ({ response }) {
+      return { success: false, response };
+    }
+  }
 }
 
 export const postService = new PostService();
