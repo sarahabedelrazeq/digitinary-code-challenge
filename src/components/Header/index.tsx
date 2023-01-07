@@ -85,6 +85,7 @@ export default function Header({ window }: Props) {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              sx={{ display: { xs: "none", sm: "flex" } }}
             >
               <Badge badgeContent={4} color="error">
                 <Mail
@@ -100,6 +101,7 @@ export default function Header({ window }: Props) {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              sx={{ display: { xs: "none", sm: "flex" } }}
             >
               <Badge badgeContent={17} color="error">
                 <Notifications
@@ -116,7 +118,7 @@ export default function Header({ window }: Props) {
               edge="end"
               aria-label="search"
               color="inherit"
-              sx={{ display: { xs: "flex", md: "none" } }}
+              sx={{ display: { xs: "flex", lg: "none" } }}
             >
               <SearchIcon
                 sx={{
