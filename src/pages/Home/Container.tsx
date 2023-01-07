@@ -1,6 +1,10 @@
 import React from "react";
 import { postService } from "services";
 import postsContext from "store/postsContext";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 function withContainer(
   WrappedComponent: React.FC<{
@@ -28,9 +32,35 @@ function withContainer(
     const deleteHandler = React.useCallback(
       async (id: number) => {
         //Promise.all([postService.deletePosts(id), getPosts()]);
-        postService.deletePosts(id)
+        MySwal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            addPostsHandler(posts?.filter((item) => !(item?.id === id)));
+
+            postService
+              .deletePosts(id)
+              .then(() =>
+                MySwal.fire(
+                  "Deleted!",
+                  "Your file has been deleted.",
+                  "success"
+                )
+              );
+          } else if (
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            MySwal.fire("Cancelled", "Your post is safe :)", "error");
+          }
+        });
       },
-      []
+      [posts, addPostsHandler]
     );
 
     const getComments = React.useCallback(async (id: number) => {
