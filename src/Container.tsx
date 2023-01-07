@@ -1,5 +1,6 @@
 import React from "react";
 import UserContext from "store/userContext";
+import PostsContext from "store/postsContext";
 import { ErrorBoundary } from "components";
 import { User } from "interfaces";
 
@@ -8,6 +9,7 @@ function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
     const [loading, setLoading] = React.useState<boolean>(true);
     const [user, setUser] = React.useState<User | null>(null);
     const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
+    const [posts, setPosts] = React.useState<Array<object> | null>(null);
 
     React.useEffect(() => {
       const localStorageUser = localStorage.getItem(
@@ -45,9 +47,16 @@ function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
           logoutHandler: logoutHandler,
         }}
       >
-        <ErrorBoundary>
-          <WrappedComponent loading={loading} />
-        </ErrorBoundary>
+        <PostsContext.Provider
+          value={{
+            posts: posts,
+            addPostsHandler: setPosts,
+          }}
+        >
+          <ErrorBoundary>
+            <WrappedComponent loading={loading} />
+          </ErrorBoundary>
+        </PostsContext.Provider>
       </UserContext.Provider>
     );
   };

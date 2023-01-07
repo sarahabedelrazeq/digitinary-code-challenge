@@ -10,6 +10,7 @@ import React from "react";
 import { Add } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { postService } from "services";
+import postsContext from "store/postsContext";
 
 const style = {
   position: "absolute",
@@ -33,6 +34,7 @@ export default function EditPost({
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const { posts, addPostsHandler } = React.useContext(postsContext);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,13 +43,26 @@ export default function EditPost({
     event.preventDefault();
     setLoading(true);
     const data = new FormData(event.currentTarget);
-    if (data.get("title"))
+    if (data.get("title")) {
       postService.editPost({
         ...post,
         title: data.get("title"),
         body: data.get("body"),
       });
-    else setError("you should fill title field");
+      if (posts)
+        addPostsHandler(
+          posts.map((item) =>
+            item.id === post.id
+              ? (item = {
+                  ...item,
+                  title: data.get("title"),
+                  body: data.get("body"),
+                })
+              : item
+          )
+        );
+      handleClose();
+    } else setError("you should fill title field");
     setLoading(false);
   };
 
@@ -69,7 +84,7 @@ export default function EditPost({
       >
         <Box sx={style}>
           <Typography component="h1" variant="h5">
-            add post
+            Edit post
           </Typography>
           <Box
             component="form"
@@ -111,7 +126,7 @@ export default function EditPost({
               variant="contained"
               sx={{ mt: 3, mb: 2, color: "white" }}
             >
-              add Post
+              Edit post
             </LoadingButton>
           </Box>
         </Box>

@@ -51,6 +51,7 @@ const Post = ({
   const [comments, setComments] = React.useState<Array<Comment>>([]);
   const { user } = React.useContext(userContext);
 
+
   React.useEffect(() => {
     getComments(id).then((data: Array<Comment>) => setComments(data));
   }, [id, getComments]);

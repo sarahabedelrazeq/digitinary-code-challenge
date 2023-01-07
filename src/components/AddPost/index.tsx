@@ -11,6 +11,7 @@ import { Add } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { postService } from "services";
 import userContext from "store/userContext";
+import postsContext from "store/postsContext";
 
 const style = {
   position: "absolute",
@@ -29,6 +30,7 @@ export default function AddPost({ children }: { children: React.ReactNode }) {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { user } = React.useContext(userContext);
+  const { posts, addPostsHandler } = React.useContext(postsContext);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -37,13 +39,24 @@ export default function AddPost({ children }: { children: React.ReactNode }) {
     event.preventDefault();
     setLoading(true);
     const data = new FormData(event.currentTarget);
-    if (data.get("title"))
+    if (data.get("title")) {
       postService.addPost({
         userId: user && user.id,
         title: data.get("title"),
         body: data.get("body"),
       });
-    else setError("you should fill title field");
+      if (posts)
+        addPostsHandler([
+          {
+            id: Math.random() * 999,
+            userId: user && user.id,
+            title: data.get("title"),
+            body: data.get("body"),
+          },
+          ...posts,
+        ]);
+      handleClose();
+    } else setError("you should fill title field");
     setLoading(false);
   };
 

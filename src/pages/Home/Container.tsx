@@ -1,5 +1,6 @@
 import React from "react";
 import { postService } from "services";
+import postsContext from "store/postsContext";
 
 function withContainer(
   WrappedComponent: React.FC<{
@@ -10,15 +11,15 @@ function withContainer(
   }>
 ) {
   return () => {
-    const [posts, setPosts] = React.useState<Array<object> | null>(null);
     const [postsLoading, setPostsLoading] = React.useState<boolean>(false);
+    const { posts, addPostsHandler } = React.useContext(postsContext);
 
     const getPosts = React.useCallback(async () => {
       setPostsLoading(true);
       const posts = await postService.getPosts();
-      if (posts?.data) setPosts(posts?.data);
+      if (posts?.data) addPostsHandler(posts?.data);
       setPostsLoading(false);
-    }, []);
+    }, [addPostsHandler]);
 
     React.useEffect(() => {
       getPosts();
@@ -26,9 +27,10 @@ function withContainer(
 
     const deleteHandler = React.useCallback(
       async (id: number) => {
-        Promise.all([postService.deletePosts(id), getPosts()]);
+        //Promise.all([postService.deletePosts(id), getPosts()]);
+        postService.deletePosts(id)
       },
-      [getPosts]
+      []
     );
 
     const getComments = React.useCallback(async (id: number) => {
