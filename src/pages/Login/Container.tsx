@@ -21,7 +21,7 @@ function withContainer(
       const users = await userService.getUsers();
       if (users?.data) setUsers(users?.data);
       setUsersLoading(false);
-      console.log(users);
+
     }, []);
 
     React.useEffect(() => {
