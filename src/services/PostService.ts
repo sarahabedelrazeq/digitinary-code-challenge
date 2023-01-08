@@ -10,6 +10,8 @@ class PostService {
   getAllEndPoint = endPoints.general.getPosts;
   getSingleEndPoint = endPoints.general.getPost;
   getCommentsEndPoint = endPoints.general.getComments;
+  deleteSingleEndPoint = endPoints.general.deletePost;
+  addPostEndPoint = endPoints.general.addPost;
 
   async getComments(id: number) {
     try {
@@ -39,7 +41,7 @@ class PostService {
     try {
       await apiService
         .unauthenticated()
-        .delete(`${this.getSingleEndPoint}/${id}`);
+        .delete(`${this.deleteSingleEndPoint}/${id}`);
     } catch ({ response }) {}
   }
 
@@ -47,7 +49,7 @@ class PostService {
     try {
       const data = await apiService
         .unauthenticated()
-        .post(this.getAllEndPoint, item);
+        .post(this.addPostEndPoint, item);
       return { success: true, data };
     } catch ({ response }) {
       return { success: false, response };
