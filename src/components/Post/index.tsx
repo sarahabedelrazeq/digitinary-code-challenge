@@ -158,7 +158,7 @@ const Post = ({
                               mb: 1,
                             }}
                           >
-                            <Box
+                            <Typography
                               component="p"
                               sx={{
                                 color: "grey.800",
@@ -169,7 +169,7 @@ const Post = ({
                               className=" text-overflow-2"
                             >
                               {item?.body}
-                            </Box>
+                            </Typography>
                           </Box>
                         }
                         secondary="Jan 7, 2014"
