@@ -23,14 +23,7 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import userContext from "store/userContext";
 import EditPost from "components/EditPost";
-
-interface Comment {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
+import { Comment } from "interfaces";
 
 const Post = ({
   id,
