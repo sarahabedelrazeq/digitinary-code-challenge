@@ -70,6 +70,7 @@ const Post = ({
               <IconButton onClick={() => setOpen(!open)} aria-label="settings">
                 <MoreVert />
               </IconButton>
+
               {open && (
                 <MenuList
                   sx={{
@@ -77,6 +78,7 @@ const Post = ({
                     right: 0,
                     backgroundColor: "white",
                     border: (theme) => `1px solid ${theme.palette.grey[400]}`,
+                    zIndex: "2"
                   }}
                   id="composition-menu"
                   aria-labelledby="composition-button"
