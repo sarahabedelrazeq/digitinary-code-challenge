@@ -11,6 +11,7 @@ import { Add } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { postService } from "services";
 import postsContext from "store/postsContext";
+import { Post } from "interfaces";
 
 const style = {
   position: "absolute",
@@ -29,7 +30,7 @@ export default function EditPost({
   post,
 }: {
   children: React.ReactNode;
-  post: { id?: number; title?: string; body?: string; userId?: number };
+  post: Post;
 }) {
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState("");

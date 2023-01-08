@@ -23,20 +23,14 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import userContext from "store/userContext";
 import EditPost from "components/EditPost";
-import { Comment } from "interfaces";
+import { Comment, Post as PostInterfaces } from "interfaces";
 
 const Post = ({
-  id,
-  title,
-  body,
-  userId,
+  post,
   deleteFun,
   getComments,
 }: {
-  id?: number;
-  title?: string;
-  body?: string;
-  userId?: number;
+  post: PostInterfaces;
   deleteFun: Function;
   getComments: Function;
 }) => {
@@ -46,8 +40,8 @@ const Post = ({
   const { user } = React.useContext(userContext);
 
   React.useEffect(() => {
-    getComments(id).then((data: Array<Comment>) => setComments(data));
-  }, [id, getComments]);
+    getComments(post.id).then((data: Array<Comment>) => setComments(data));
+  }, [post.id, getComments]);
 
   return (
     <div>
@@ -76,15 +70,13 @@ const Post = ({
                   id="composition-menu"
                   aria-labelledby="composition-button"
                 >
-                  {user && userId === user.id && (
+                  {user && post.userId === user.id && (
                     <MenuItem>
-                      <EditPost post={{ id, title, body, userId }}>
-                        edit post
-                      </EditPost>
+                      <EditPost post={post}>edit post</EditPost>
                     </MenuItem>
                   )}
-                  {user && userId === user.id && (
-                    <MenuItem onClick={() => id && deleteFun(id)}>
+                  {user && post.userId === user.id && (
+                    <MenuItem onClick={() => deleteFun(post.id)}>
                       delete post
                     </MenuItem>
                   )}
@@ -93,13 +85,13 @@ const Post = ({
               )}
             </Box>
           }
-          title={title}
+          title={String(post.title)}
           subheader="today"
         />
 
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {body}
+            {String(post.body)}
           </Typography>
         </CardContent>
 
@@ -178,7 +170,9 @@ const Post = ({
                 sx={{ color: "black" }}
                 aria-label="show all comments"
               >
-                {comments.length > 1 && !show ? "show all comments": "hidden comments"}
+                {comments.length > 1 && !show
+                  ? "show all comments"
+                  : "hidden comments"}
               </Button>
             </List>
           </div>

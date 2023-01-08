@@ -2,14 +2,14 @@ import React from "react";
 import UserContext from "store/userContext";
 import PostsContext from "store/postsContext";
 import { ErrorBoundary } from "components";
-import { User } from "interfaces";
+import { Post, User } from "interfaces";
 
 function withContainer(WrappedComponent: React.FC<{ loading: boolean }>) {
   return () => {
     const [loading, setLoading] = React.useState<boolean>(true);
     const [user, setUser] = React.useState<User | null>(null);
     const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
-    const [posts, setPosts] = React.useState<Array<object> | null>(null);
+    const [posts, setPosts] = React.useState<Array<Post> | null>(null);
 
     React.useEffect(() => {
       const localStorageUser = localStorage.getItem(

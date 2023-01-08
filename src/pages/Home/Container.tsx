@@ -1,3 +1,4 @@
+import { Post } from "interfaces";
 import React from "react";
 import { postService } from "services";
 import postsContext from "store/postsContext";
@@ -8,7 +9,7 @@ const MySwal = withReactContent(Swal);
 
 function withContainer(
   WrappedComponent: React.FC<{
-    posts: Array<object> | null;
+    posts: Array<Post> | null;
     postsLoading: boolean;
     deletePost: Function;
     getComments: Function;

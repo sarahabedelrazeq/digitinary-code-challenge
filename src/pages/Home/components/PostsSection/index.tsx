@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Skeleton, Stack } from "@mui/material";
 import Post from "components/Post";
+import { Post as PostInterface } from "interfaces";
 
 export default function PostsSection({
   posts,
@@ -8,7 +9,7 @@ export default function PostsSection({
   deleteFun,
   getComments,
 }: {
-  posts: Array<object> | null;
+  posts: Array<PostInterface> | null;
   loading: boolean;
   deleteFun: Function;
   getComments: Function;
@@ -26,7 +27,7 @@ export default function PostsSection({
         posts && (
           <Box>
             {posts.map((post, index) => {
-              return <Post {...post} getComments={getComments} deleteFun={deleteFun} key={index} />;
+              return <Post post={post} getComments={getComments} deleteFun={deleteFun} key={post.id} />;
             })}
           </Box>
         )

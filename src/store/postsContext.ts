@@ -1,8 +1,8 @@
-import { Posts } from "interfaces";
+import { Post } from "interfaces";
 import React from "react";
 
 interface UserContextInterface {
-  posts: Array<Posts> | null;
+  posts: Array<Post> | null;
   addPostsHandler: Function;
 }
 

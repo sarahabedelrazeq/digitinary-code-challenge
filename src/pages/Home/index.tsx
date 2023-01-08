@@ -3,6 +3,7 @@ import { Main } from "components/Layouts";
 import Section from "components/Section";
 import PostsSection from "./components/PostsSection";
 import withContainer from "./Container";
+import { Post } from "interfaces";
 
 function Home({
   posts,
@@ -10,7 +11,7 @@ function Home({
   deletePost,
   getComments,
 }: {
-  posts: Array<object> | null;
+  posts: Array<Post> | null;
   postsLoading: boolean;
   deletePost: Function;
   getComments: Function;
