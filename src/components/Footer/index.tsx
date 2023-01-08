@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
       <Typography align="center" variant="subtitle2" gutterBottom>
-        All copy rights reserved to IPA School Library © {moment().year()}
+        All copy rights reserved to Digitinary Code Challenge © {moment().year()}
       </Typography>
     </footer>
   );
