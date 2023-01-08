@@ -165,15 +165,15 @@ const Post = ({
                   </>
                 ))}
 
-              <Button
-                onClick={() => setShow(!show)}
-                sx={{ color: "black" }}
-                aria-label="show all comments"
-              >
-                {comments.length > 1 && !show
-                  ? "show all comments"
-                  : "hidden comments"}
-              </Button>
+              {comments.length > 1 && (
+                <Button
+                  onClick={() => setShow(!show)}
+                  sx={{ color: "black" }}
+                  aria-label="show all comments"
+                >
+                  {!show ? "show all comments" : "hidden comments"}
+                </Button>
+              )}
             </List>
           </div>
         )}
