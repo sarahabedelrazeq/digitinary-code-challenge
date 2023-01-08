@@ -78,7 +78,7 @@ const Post = ({
                     right: 0,
                     backgroundColor: "white",
                     border: (theme) => `1px solid ${theme.palette.grey[400]}`,
-                    zIndex: "2"
+                    zIndex: "2",
                   }}
                   id="composition-menu"
                   aria-labelledby="composition-button"
@@ -179,15 +179,14 @@ const Post = ({
                     <Divider variant="inset" component="li" />
                   </>
                 ))}
-              {comments.length > 1 && !show && (
-                <Button
-                  onClick={() => setShow(true)}
-                  sx={{ color: "black" }}
-                  aria-label="show all comments"
-                >
-                  show all comments
-                </Button>
-              )}
+
+              <Button
+                onClick={() => setShow(!show)}
+                sx={{ color: "black" }}
+                aria-label="show all comments"
+              >
+                {comments.length > 1 && !show ? "show all comments": "hidden comments"}
+              </Button>
             </List>
           </div>
         )}
