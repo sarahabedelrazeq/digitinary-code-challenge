@@ -7,6 +7,8 @@ import "assets/sass/index.scss";
 import { ThemeProvider } from "@mui/material";
 import { mainTheme } from "themes";
 
+//test
+
 function App({ loading }: { loading: boolean }) {
   return (
     <div className="App">
